@@ -25,17 +25,61 @@ The attacker runs the Oncogene python script which starts a socket server on a s
 
 Once a connection has been established the attacker can execute some commands such as screenshotting the victim's desktop, downloading and uploading files, getting a simple shell and so on.
 
-There's also a backup feature to retreive the keylogger files if the target stops the backdoor: the launcher.exe will also run a small script (in .exe format) which will try to send the logs to the attacker. Scroll down to find the dedicated section.
+## Instructions
+
+In order to use this tool you need to tweak some things inside the scripts: inside clientwin.py you must replace the value for the Server IP. You can change the port number if you want, the default one is 1234. Inside oncogene.py everything should be fine, the script grabs automatically the host's IP address; you may need to change this value inside /etc/hosts since it can't be localhost. If you plan to use the non-default backup feature then inside backup.py you need to change the values for email and password. Inside the defualt backup feature b2.py you need to modify the server's IP address. Don't worry about what those features are, scrool down and find the explaination. 
+
+If you want to deploy the malware then inside launcher.py you need to change the paths for the .exe that you will create. Scroll down to the "Deploying" section where I will explain you how to setup everything.
+
+Check the comments inside the source code to guide yourself through the setup process.
 
 ### Deploying Oncogene
+
+In order to deploy this malware you need to get dirty hands: you need to pack the code into an executable Windows file.
+
+#### You need:
+- Pyinstaller 
+- A Windows machine
+
+Once the requirements are satisfied you have to run these commands inside a CMD instance:
+
+#### Run
+
+```
+pyinstaller --onefile --noconsole launcher.py
+```
+
+```
+pyinstaller --onefile --noconsole b2.py
+```
+
+You can even use backup.py if you want. B2 is the defualt one which I reccomend.
+
+```
+pyinstaller --onefile --noconsole clientwin.py
+```
+
+Go grab the 3 .exe inside the newly created "dist" folder and place them together in a folder you want. You can leave them there if you want but I suggest you to move them into another folder.
+
+#### Front program
+
+Once this is done you need to grab a front-program, this will be the .exe that the victim will interact with not knowing that a malware is running in the background. It can be whatever you want, I personally used minesweeper. You can grab a free copy of it on the Internet.
+
+#### Done!
+
+Modify the things that I described into the "Instruction" section and you are ready to deploy this malware!
+
+If you just want to test this backdoor without packing everything inside executables then you can just run the python scripts.
 
 ![](./documentation/packaging.png)
 
 Let's imagine that you want to distribute this malware (you shouldn't).
 
-The launcher.exe is the main file, the idea is to rename it to whatever you want (for example: minesweeper.exe): so you want to fool the victim by making him launch the game exe which, in reality, launches the front program exe (the real minesweeper.exe) and the backdoor.exe in a hidden window instance. Basically, to the victim's eye will appear only the real program interface but the backdoor will be ran in a hidden way in the background.
+The launcher.exe is the main file, the idea is to rename it to whatever you want (for example: minesweeper.exe): you want to fool the victim by making him launch the game exe which, in reality, launches the front program exe (the real minesweeper.exe) and the backdoor.exe in a hidden window instance. Basically, to the victim's eye will appear only the real program interface but the backdoor will be ran in a hidden way in the background.
 
 Closing the real program window WON'T stop the backdoor (that's the cool part); to stop it you have to terminate the process in TaskManager or by choosing the option "--close" on the attacker's side.
+
+There's also a backup feature to retreive the keylogger files if the target stops the backdoor: the launcher.exe will also run a small script (in .exe format) which will try to send the logs to the attacker. Scroll down to find the dedicated section.
 
 ## What's inside this repo?
 
@@ -100,10 +144,6 @@ python clientwin.py
 I've implemented two ways of retreiving the keylogger files if the connnection gets cut, so even if the victim stops the backdoor you are able to get the keylogger files in two different ways: by establishing another connection to the victim on a different port (with another script) or by using my backup script that uploads the logs to MEGA. You obviously need a MEGA account.
 
 The first option is the DEAFULT one, so if you want to use the second you have to do a little bit of tweaking: you need to comment out the backupConnection function in the Oncogene.py file and replace the "backupexe" path in the launcher script with the correct .exe (the MEGA one).
-
-## HOWTO
-
-In order to use this tool you need to tweak some things inside the source code: the server's IP and the PORT number. Everything else should be up and running!
 
 ## Why did I build it?
 
