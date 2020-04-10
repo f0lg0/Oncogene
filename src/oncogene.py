@@ -201,11 +201,8 @@ class Server:
                     print("[!] Something went wrong")
 
             elif i == 'esc':
-                try:
-                    self.server.close()
-                    sys.exit()
-                except:
-                    print("[!] Something went wrong.")
+                self.server.close()
+                sys.exit()
             else:
                 print("[!] Invalid choice, retry.")
                 flag = True  # skip checking connection
