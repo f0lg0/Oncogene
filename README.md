@@ -192,6 +192,8 @@ Keep in mind that Oncogene isn't a super sophisticated tool but it is:
 - Port for Linux machines 
 - Keylogger files encryption
 
+Some people suggested me to use argparse to avoid setting things manually inside the code but there's a problem: if you plan on deploying it with the method that I've explained before then atgparse doesn't make sense. I will tho add it anyway. Stay tuned! 
+
 ## FAQs
 
 ### _Can I (attacker) be tracked?_
