@@ -85,8 +85,6 @@ There's also a backup feature to retreive the keylogger files if the target stop
 
 There are mainly 2 Python scripts excluding the displayBanner and mainMenu files: "oncogene.py" for the attacker (Linux),  and "clientwin.py" for Windows machines.
 
-There's also the launcher.exe (and the source script) which can be used to deploy the backdoor in real life.
-
 ## Features
 
 * Reverse Shell
