@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This changelog is pretty "young", I didn't keep it when I started the projects a long while ago.
 
 ## [Unreleased]
+## [0.5.0] - 2020-04-11
+## Added
+- handled ConnectionResetError for more stability
+- sleep functions to avoid buffer congestion
+
+## [0.4.0] - 2020-04-10
+### Added
+- More stability in case of force quit
+
 ## [0.3.0] - 2020-04-07
 ### Added
 - feature to hide the keylogger files
