@@ -88,7 +88,7 @@ There are mainly 2 Python scripts excluding the displayBanner and mainMenu files
 ## Features
 
 * Reverse Shell
-* Get target informations (OS, IP..)
+* Get target information (OS, IP..)
 * Shutdown the target
 * Screenshot
 * Upload files
@@ -171,7 +171,7 @@ So this tool lies behind a "normal" program and once activated it can cause seve
 
 This is a simple yet powerful way to attack a computer (but remember: hacking people is easier than hacking PCs!). The user downloads a "front-program" distribuited by the attacker with hidden inside this backdoor: A script runs both the "normal" program and the backdoor at the same time using threads. Once the attacker gets a connection the numbers of possible actions is pretty huge.
 
-Oncogene can also be used for transfering files easily, monitoring and controlling a PC remotely with the consent of the user. 
+Oncogene can also be used for transferring files easily, monitoring and controlling a PC remotely with the consent of the user. 
 
 _Is your son playing too much videogames?_
 
