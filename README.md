@@ -6,7 +6,7 @@ Logo								  | Main Menu
 
 # DISCLAIMER
 
-**Oncogene is meant to be used only for educational/reasearch purposes. I am not responsable for any kind of damage caused by this tool.
+**Oncogene is meant to be used only for educational/research purposes. I am not responsable for any kind of damage caused by this tool.
 Downloading this means that you agree to use it at YOUR OWN RISK. Use this tool locally on your own enviromnent.
 Thanks.**
 
