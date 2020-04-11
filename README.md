@@ -107,10 +107,22 @@ There's also the launcher.exe (and the source script) which can be used to deplo
 
 ### Server
 
+* socket
+* sys
+* os
+* time
 * ZipFile
 
 ### Client (Python script)
 
+* socket
+* subprocess
+* sys
+* os
+* ctypes
+* platform
+* threading
+* time
 * mss
 * ZipFile
 * Pynput
