@@ -10,7 +10,7 @@ class colors:
     WHITE = '\033[1;97m'
 
 def banner():
-    version = "1.0"
+    version = "0.6.0"
     githublink = "https://github.com/f0lg0/Oncogene"
 
     print("\n+--------------------------------------------------------------+\n")
