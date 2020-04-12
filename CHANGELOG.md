@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This changelog is pretty "young", I didn't keep it when I started the projects a long while ago.
 
 ## [Released]
+## [0.6.0] - 2020-04-12
+## Added
+- support for Linux targets
+
 ## [0.5.0] - 2020-04-11
 ## Added
 - handled ConnectionResetError for more stability

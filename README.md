@@ -12,10 +12,10 @@ Thanks.**
 
 # About Oncogene
 
-A simple Windows backdoor/RAT + KeyLogger written in Python using sockets.
+A simple Windows/Linux backdoor/RAT + KeyLogger written in Python using sockets.
 
 # NOTE
-I've developed Oncogene in a Linux environment, it may not work under other systems. This backdoor targets Windows but the attacker should use Linux. 
+I've developed Oncogene in a Linux environment, it may not work under other systems. This backdoor targets Windows (and now even Linux!) but the attacker should use Linux. 
 
 ## How does it work?
 
@@ -27,7 +27,7 @@ Once a connection has been established the attacker can execute some commands su
 
 ## Instructions
 
-In order to use this tool you need to tweak some things inside the scripts: inside clientwin.py you must replace the value for the Server IP. You can change the port number if you want, the default one is 1234. Inside oncogene.py everything should be fine, the script grabs automatically the host's IP address; you may need to change this value inside /etc/hosts since it can't be localhost. If you plan to use the non-default backup feature then inside backup.py you need to change the values for email and password. Inside the defualt backup feature b2.py you need to modify the server's IP address. Don't worry about what those features are, scrool down and find the explaination. 
+In order to use this tool you need to tweak some things inside the scripts: inside clientwin.py/clientlinux.py you must replace the value for the Server IP. You can change the port number if you want, the default one is 1234. Inside oncogene.py everything should be fine, the script grabs automatically the host's IP address; you may need to change this value inside /etc/hosts since it can't be localhost. If you plan to use the non-default backup feature then inside backup.py you need to change the values for email and password. Inside the defualt backup feature b2.py you need to modify the server's IP address. Don't worry about what those features are, scrool down and find the explaination. 
 
 If you want to deploy the malware then inside launcher.py you need to change the paths for the .exe that you will create. Scroll down to the "Deploying" section where I will explain you how to setup everything.
 
@@ -37,9 +37,11 @@ Check the comments inside the source code to guide yourself through the setup pr
 
 In order to deploy this malware you need to get dirty hands: you need to pack the code into an executable Windows file.
 
+NOTE: if you want to pack it for Linux systems the steps are the same but the files will be different (as there are no .exe in Linux). Launcher.py has been developed for Windows, the backup feature on the other hand can be used for Linux too.
+
 #### You need:
 - Pyinstaller 
-- A Windows machine
+- A Windows machine for packing in .exe OR a Linux machine if you want to make Linux files
 
 Once the requirements are satisfied you have to run these commands inside a CMD instance:
 
@@ -81,9 +83,15 @@ Closing the real program window WON'T stop the backdoor (that's the cool part); 
 
 There's also a backup feature to retreive the keylogger files if the target stops the backdoor: the launcher.exe will also run a small script (in .exe format) which will try to send the logs to the attacker. Scroll down to find the dedicated section.
 
+This applies to Linux too, just with different files.
+
+#### Linux Support
+
+Now thath Oncogene has support for Linux systems you can pack the script into a Linux executable. Follow the same steps above, you may want to modify the launcher.py since it's meant to be for Windows machines. The steps are bascially the same, if you need help contact me!
+
 ## What's inside this repo?
 
-There are mainly 2 Python scripts excluding the displayBanner and mainMenu files: "oncogene.py" for the attacker (Linux),  and "clientwin.py" for Windows machines.
+There are mainly 3 Python scripts excluding the displayBanner and mainMenu files: "oncogene.py" for the attacker (Linux), "clientwin.py" for Windows machines and clientlinux.py for Linux systems.
 
 ## Features
 
@@ -97,6 +105,9 @@ There are mainly 2 Python scripts excluding the displayBanner and mainMenu files
 * Run additional Python scripts
 * Close the connection
 * Get clipboard
+
+### Windows only!
+
 * Kill processes (TaskManager) 
 * Display a message box 
 * Lock PC 
@@ -124,7 +135,7 @@ There are mainly 2 Python scripts excluding the displayBanner and mainMenu files
 * mss
 * ZipFile
 * Pynput
-* pyperclip
+* pyperclip -> ( + xsel and xclip for Linux)
 
 ### Client (.exe)
 
@@ -140,13 +151,21 @@ python3 oncogene.py
 
 ### Client (Python script)
 
+Windows
+
 ```
-python3 client.py 
+python3 clientwin.py 
 ```
 Or if you only have python3
 
 ```
 python clientwin.py
+```
+
+Linux
+
+```
+python3 clientlinux.py
 ```
 
 ## Backup feature
@@ -189,10 +208,9 @@ Keep in mind that Oncogene isn't a super sophisticated tool but it is:
 
 ## COMING SOON!
 
-- Port for Linux machines 
 - Keylogger files encryption
 
-Some people suggested me to use argparse to avoid setting things manually inside the code but there's a problem: if you plan on deploying it with the method that I've explained before then atgparse doesn't make sense. I will tho add it anyway. Stay tuned! 
+Some people suggested me to use argparse to avoid setting things manually inside the code but there's a problem: if you plan on deploying it with the method that I've explained before then atgparse doesn't make sense.
 
 ## FAQs
 
