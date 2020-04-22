@@ -204,13 +204,6 @@ Keep in mind that Oncogene isn't a super sophisticated tool but it is:
 * Fast
 * Easy to use, to understand and to modify
 * FREE
-* Costantly under development
-
-## COMING SOON!
-
-- Keylogger files encryption
-
-Some people suggested me to use argparse to avoid setting things manually inside the code but there's a problem: if you plan on deploying it with the method that I've explained before then atgparse doesn't make sense.
 
 ## FAQs
 
